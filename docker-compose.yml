@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - DATABASE_URL=mysql+pymysql://user:password@db:3306/orbitronic
       - SECRET_KEY=your-secret-key
