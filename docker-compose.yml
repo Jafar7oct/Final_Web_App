@@ -1,19 +1,27 @@
+version: '3'
+
 services:
   web:
     build: .
+    container_name: web-app
     ports:
       - "5000:5000"
     environment:
       - DATABASE_URL=mysql+pymysql://user:password@db:3306/orbitronic
       - SECRET_KEY=your-secret-key
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - .:/app
     restart: unless-stopped
+    networks:
+      - default
+      - zap-network
 
   db:
     image: mysql:8.0
+    container_name: mysql-db
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=orbitronic
@@ -27,6 +35,15 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - default
+      - zap-network
+
+networks:
+  default:
+  zap-network:
+    external:
+      name: ${NETWORK_NAME:-orbitronic-network}
 
 volumes:
   db-data:
