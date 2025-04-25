@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Orbitronic{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <div class="product-header">
+        <a href="/" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Products
+        </a>
+        <h1>{{ product.name }}</h1>
+    </div>
+
+    <div class="product-content">
+        <div class="product-image-container">
+            <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="product-detail-image" id="productImage">
+        </div>
+
+        <div class="product-info-container">
+            <div class="product-main-info">
+                <h2 class="price">${{ product.price }}</h2>
+                <p class="description">{{ product.description }}</p>
+                
+                <div class="product-specs">
+                    <h3>Specifications</h3>
+                    {% if product.type == 'phone' %}
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Display</span>
+                                <span class="spec-value">{{ product.details.screen }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-microchip"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Processor</span>
+                                <span class="spec-value">{{ product.details.chip }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-battery-full"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Battery</span>
+                                <span class="spec-value">{{ product.details.battery }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-camera"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Camera</span>
+                                <span class="spec-value">{{ product.details.camera }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <i class="fas fa-laptop"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Display</span>
+                                <span class="spec-value">{{ product.details.screen }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-memory"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Memory</span>
+                                <span class="spec-value">{{ product.details.memory }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-hdd"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Storage</span>
+                                <span class="spec-value">{{ product.details.storage }}</span>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-microchip"></i>
+                            <div class="spec-details">
+                                <span class="spec-label">Processor</span>
+                                <span class="spec-value">{{ product.details.processor }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-primary btn-lg mt-4 w-100 add-to-cart" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-detail {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .product-header {
+        margin-bottom: 2rem;
+    }
+
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .back-button:hover {
+        color: var(--primary-color);
+    }
+
+    .product-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .product-image-container {
+        position: sticky;
+        top: 100px;
+        overflow: hidden;
+    }
+
+    .product-detail-image {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .product-info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .price {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-color);
+    }
+
+    .product-specs {
+        background: var(--card-background);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-top: 2rem;
+        box-shadow: var(--card-shadow);
+    }
+
+    .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .spec-item i {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+
+    .spec-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .spec-label {
+        font-size: 0.9rem;
+        color: var(--secondary-color);
+    }
+
+    .spec-value {
+        font-size: 1rem;
+        color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+        .product-content {
+            grid-template-columns: 1fr;
+        }
+
+        .product-image-container {
+            position: static;
+            margin-bottom: 2rem;
+        }
+
+        .specs-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}

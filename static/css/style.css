@@ -1,0 +1,606 @@
+:root {
+    --primary-color: #0066cc; /* Vibrant blue for buttons and accents */
+    --secondary-color: #6b7280; /* Neutral gray for secondary elements */
+    --background-color: #f7f7f8; /* Clean, premium white background */
+    --text-color: #111827; /* Dark text for readability */
+    --card-background: #ffffff; /* White cards for contrast */
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    --hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Elevated hover effect */
+    --nav-background: rgba(255, 255, 255, 0.7); /* Glassmorphic navbar */
+    --accent-gradient: linear-gradient(45deg, #0066cc, #3b82f6); /* Gradient for buttons */
+}
+
+[data-theme="dark"] {
+    --primary-color: #3b82f6; /* Rich blue for dark mode */
+    --secondary-color: #9ca3af; /* Light gray for secondary elements */
+    --background-color: #0b132b; /* Deep navy for premium dark mode */
+    --text-color: #e5e7eb; /* Light text for contrast */
+    --card-background: #1e2a44; /* Dark navy cards */
+    --card-shadow: 0 4px 12px rgba(255, 255, 255, 0.05); /* Subtle glow */
+    --hover-shadow: 0 8px 24px rgba(59, 130, 246, 0.3); /* Blue glow in dark mode */
+    --nav-background: rgba(11, 19, 43, 0.7); /* Glassmorphic dark navbar */
+    --accent-gradient: linear-gradient(45deg, #3b82f6, #60a5fa); /* Blue gradient */
+    --glow-color: rgba(59, 130, 246, 0.5); /* Subtle glow for dark mode */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+    padding-top: 80px; /* Space for fixed navbar */
+}
+
+.navbar {
+    background: var(--nav-background) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+[data-theme="dark"] .navbar {
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2); /* Blue glow in dark mode */
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--primary-color) !important;
+    letter-spacing: -0.02em;
+}
+
+.navbar-nav.justify-content-center {
+    flex-grow: 1; /* Ensure centered links take available space */
+    gap: 2rem; /* Increased spacing between links */
+}
+
+.navbar-nav.align-items-center {
+    flex-shrink: 0; /* Prevent icons from stretching */
+}
+
+.nav-link {
+    font-weight: 500; /* Bolder for prominence */
+    font-size: 1.1rem; /* Slightly larger */
+    color: var(--text-color) !important;
+    position: relative; /* For underline effect */
+    padding: 0.5rem 0.25rem; /* Adjusted for balance */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: scale(1.05); /* Subtle scale on hover */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%; /* Underline grows on hover */
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.nav-link.active::after {
+    width: 100%; /* Persistent underline for active link */
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 7rem 0 5rem; /* Increased padding for more space */
+    background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.2) 0%, var(--background-color) 70%);
+    position: relative;
+    overflow: hidden;
+    min-height: 600px; /* Ensure enough space for visuals */
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-particles::before,
+.hero-particles::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--glow-color, transparent); /* Fallback to transparent in light mode */
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: particleFloat 15s infinite linear;
+}
+
+.hero-particles::before {
+    top: 20%;
+    left: 10%;
+    animation-delay: -5s;
+}
+
+.hero-particles::after {
+    top: 60%;
+    right: 15%;
+    animation-delay: -10s;
+}
+
+.hero-title {
+    font-size: 4rem; /* Smaller font size */
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    color: var(--text-color);
+    text-shadow: none; /* No glow in light mode */
+}
+
+[data-theme="dark"] .hero-title {
+    text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); /* Subtler glow in dark mode */
+}
+
+.hero-subtitle {
+    font-size: 1.75rem;
+    color: var(--secondary-color);
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-weight: 500;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.hero-cta {
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--glow-color, transparent); /* No glow in light mode */
+}
+
+.hero-cta.btn-outline-primary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.hero-cta.btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 0 10px var(--glow-color, transparent);
+}
+
+.products-section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.product-card {
+    background: var(--card-background);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+}
+
+.product-card:hover {
+    transform: perspective(1000px) rotateX(3deg) rotateY(-3deg);
+    box-shadow: var(--hover-shadow);
+}
+
+.product-image {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    color: var(--text-color);
+}
+
+.product-price {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.card-body .button-container {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.card-body .button-container .btn {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+.product-detail-image-container {
+    width: 100%;
+    max-height: 600px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+    box-shadow: var(--card-shadow);
+}
+
+.product-detail-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+.product-detail-image.zoomed {
+    transform: scale(2);
+    cursor: zoom-out;
+}
+
+.btn-primary {
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 8px var(--glow-color, transparent);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 0 8px var(--glow-color, transparent);
+}
+
+.theme-toggle {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-background);
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.form-control {
+    background: var(--card-background);
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.form-label {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.card-text, .about-list li, .lead, p {
+    color: var(--text-color);
+}
+
+.about-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-list li {
+    background: transparent;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-list li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 4rem; /* Increased padding */
+}
+
+.container.contact-container, .container.about-container {
+    padding: 5rem 0; /* Increased container padding */
+}
+
+.modal, .modal-dialog, .modal-content, .modal-backdrop {
+    transition: none !important; /* Force no transitions */
+    will-change: transform; /* Optimize rendering */
+}
+
+body.modal-open {
+    overflow: hidden; /* Default Bootstrap behavior */
+}
+
+body {
+    overflow: auto; /* Ensure scrollability when modal is closed */
+}
+
+footer {
+    background: var(--nav-background);
+    color: var(--text-color);
+    padding: 3rem 0;
+    margin-top: 4rem;
+}
+
+footer h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--secondary-color);
+}
+
+/* Animations */
+.animate-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.7s ease-out;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.7s ease-out;
+}
+
+.animate-glow {
+    animation: glowPulse 4s ease-in-out infinite; /* Slower for subtler effect */
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); }
+    50% { text-shadow: 0 0 12px var(--glow-color), 0 0 20px var(--glow-color); }
+    100% { text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); }
+}
+
+@keyframes particleFloat {
+    0% { transform: translate(0, 0); opacity: 0.3; }
+    50% { transform: translate(50px, -50px); opacity: 0.5; }
+    100% { transform: translate(0, 0); opacity: 0.3; }
+}
+
+@keyframes blueGlow {
+    0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); opacity: 0.2; }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.5); opacity: 0.3; }
+    100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); opacity: 0.2; }
+}
+
+@media (max-width: 991px) {
+    main {
+        padding-top: 70px;
+    }
+
+    .navbar-nav.justify-content-center {
+        justify-content: start; /* Align left in collapsed menu */
+        gap: 0.5rem; /* Smaller gap for mobile */
+        margin-top: 1rem;
+    }
+
+    .navbar-nav.align-items-center {
+        margin-top: 0.5rem;
+    }
+
+    .nav-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+        font-size: 1rem; /* Slightly smaller on mobile */
+        padding: 0.5rem 0; /* Simplified padding */
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 0; /* Disable underline on mobile */
+    }
+
+    .hero-section {
+        padding: 4rem 0 3rem;
+        min-height: 400px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem; /* Smaller font size */
+        letter-spacing: -0.02em;
+    }
+
+    [data-theme="dark"] .hero-title {
+        text-shadow: 0 0 6px var(--glow-color), 0 0 12px var(--glow-color); /* Subtler glow on mobile */
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .hero-cta {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+    }
+
+    .hero-particles::before,
+    .hero-particles::after {
+        width: 8px;
+        height: 8px;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .product-image {
+        height: 260px;
+    }
+
+    .product-detail-image-container {
+        position: static;
+        max-height: 400px;
+    }
+
+    .product-detail-image.zoomed {
+        transform: scale(1.5);
+    }
+
+    .card-body {
+        padding: 3rem;
+    }
+
+    .container.contact-container, .container.about-container {
+        padding: 4rem 0;
+    }
+
+    .card-body .button-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .card-body .button-container .btn {
+        width: 100%;
+    }
+}

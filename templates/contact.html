@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Orbitronic{% endblock %}
+
+{% block content %}
+<div class="container contact-container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="section-title animate-slide-in">Contact Orbitronic</h1>
+            <p class="hero-subtitle text-center mb-5 animate-fade-in">We're here to help. Reach out with any questions or inquiries.</p>
+        </div>
+        <div class="col-md-8 offset-md-2">
+            <div class="card product-card animate-fade-in">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card product-card mt-5 animate-fade-in">
+                <div class="card-body">
+                    <h3 class="section-title mb-4">Store Information</h3>
+                    <p class="card-text">
+                        <strong>Address:</strong> 123 Tech Street, Digital City, TC 12345<br>
+                        <strong>Phone:</strong> (555) 123-4567<br>
+                        <strong>Email:</strong> <a href="mailto:info@orbitronic.com">info@orbitronic.com</a><br>
+                        <strong>Hours:</strong> Monday - Saturday: 9:00 AM - 8:00 PM<br>
+                        Sunday: 10:00 AM - 6:00 PM
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

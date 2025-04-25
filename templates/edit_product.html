@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Product - Orbitronic{% endblock %}
+
+{% block content %}
+<div class="container edit-product-container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="section-title animate-slide-in">Edit Product: {{ product.name }}</h1>
+            <p class="hero-subtitle text-center mb-5 animate-fade-in">Update the product details.</p>
+        </div>
+        <div class="col-md-8 offset-md-2">
+            <div class="card product-card animate-fade-in">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('edit_product', product_id=product.id) }}">
+                        <div class="mb-4">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-control" id="category" name="category" required>
+                                <option value="phones" {% if product.category == 'phones' %}selected{% endif %}>Phones</option>
+                                <option value="laptops" {% if product.category == 'laptops' %}selected{% endif %}>Laptops</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="id" class="form-label">Product ID</label>
+                            <input type="text" class="form-control" id="id" name="id" value="{{ product.id }}" readonly>
+                        </div>
+                        <div class="mb-4">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ product.name }}" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="price" class="form-label">Price ($)</label>
+                            <input type="number" class="form-control" id="price" name="price" value="{{ product.price }}" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" required>{{ product.description }}</textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="image" class="form-label">Image Filename</label>
+                            <input type="text" class="form-control" id="image" name="image" value="{{ product.image }}" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="details" class="form-label">Details (JSON)</label>
+                            <textarea class="form-control" id="details" name="details" rows="6">{{ product.details | tojson | safe }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Save Changes</button>
+                    </form>
+                    <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary btn-lg w-100 mt-3">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

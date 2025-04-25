@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Orbitronic{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-particles"></div>
+    <div class="container">
+        <h1 class="hero-title animate-glow">Orbitronic: Powering Your Future</h1>
+        <p class="hero-subtitle animate-slide-up">Discover cutting-edge smartphones and laptops designed for tomorrow</p>
+        <div class="hero-ctas animate-slide-up" style="animation-delay: 0.2s;">
+            <a href="#products" class="btn btn-primary btn-lg hero-cta">Shop Now</a>
+            <a href="#products" class="btn btn-outline-primary btn-lg hero-cta">Explore Smartphones</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <section class="products-section mb-5" id="products">
+        <h2 class="section-title animate-slide-in">New Arrivals</h2>
+        <div class="row">
+            {% for phone in products.phones %}
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card animate-fade-in" data-product-id="{{ phone.id }}">
+                    <img src="{{ url_for('static', filename=phone.image) }}" alt="{{ phone.name }}" class="product-image">
+                    <div class="card-body">
+                        <h5 class="product-title">{{ phone.name }}</h5>
+                        <h6 class="product-price mb-3">${{ phone.price }}</h6>
+                        <p class="card-text">{{ phone.description }}</p>
+                        <div class="button-container">
+                            <button class="btn btn-primary add-to-cart" data-product-id="{{ phone.id }}" data-product-name="{{ phone.name }}" data-product-price="{{ phone.price }}">Add to Cart</button>
+                            <a href="{{ url_for('product_detail', product_id=phone.id) }}" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="products-section" id="laptops">
+        <h2 class="section-title animate-slide-in">Featured Laptops</h2>
+        <div class="row">
+            {% for laptop in products.laptops %}
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card animate-fade-in" data-product-id="{{ laptop.id }}">
+                    <img src="{{ url_for('static', filename=laptop.image) }}" alt="{{ laptop.name }}" class="product-image">
+                    <div class="card-body">
+                        <h5 class="product-title">{{ laptop.name }}</h5>
+                        <h6 class="product-price mb-3">${{ laptop.price }}</h6>
+                        <p class="card-text">{{ laptop.description }}</p>
+                        <div class="button-container">
+                            <button class="btn btn-primary add-to-cart" data-product-id="{{ laptop.id }}" data-product-name="{{ laptop.name }}" data-product-price="{{ laptop.price }}">Add to Cart</button>
+                            <a href="{{ url_for('product_detail', product_id=laptop.id) }}" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+<style>
+    .product-card {
+        background: var(--card-background);
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+
+    .product-card:hover {
+        transform: perspective(1000px) rotateX(3deg) rotateY(-3deg);
+        box-shadow: var(--hover-shadow);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 200px; /* Reduced height for smaller cards */
+        object-fit: cover;
+        border-radius: 12px 12px 0 0;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .product-title {
+        font-size: 1.2rem; /* Smaller font size */
+        font-weight: 600;
+        margin: 0.5rem 0 0.25rem;
+        color: var(--text-color);
+    }
+
+    .product-price {
+        font-size: 1rem; /* Smaller font size */
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .card-body {
+        padding: 1rem; /* Reduced padding */
+    }
+
+    .card-text {
+        font-size: 0.9rem; /* Smaller description text */
+        margin-bottom: 0.5rem;
+    }
+
+    .button-container {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .button-container .btn {
+        flex: 1;
+        padding: 0.4rem 0.8rem; /* Smaller buttons */
+        font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+        .product-image {
+            height: 150px; /* Even smaller for mobile */
+        }
+
+        .product-title {
+            font-size: 1rem;
+        }
+
+        .product-price {
+            font-size: 0.9rem;
+        }
+
+        .card-body {
+            padding: 0.75rem;
+        }
+
+        .card-text {
+            font-size: 0.8rem;
+        }
+
+        .button-container .btn {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+    }
+</style>
+{% endblock %}
