@@ -9,6 +9,7 @@ services:
     environment:
       - DATABASE_URL=mysql+pymysql://user:password@db:3306/orbitronic
       - SECRET_KEY=your-secret-key
+      - FLASK_APP=app.py 
     depends_on:
       - db
     volumes:
