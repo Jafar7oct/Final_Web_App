@@ -14,7 +14,7 @@ services:
       - .:/app
     restart: unless-stopped
     networks:
-      - jenkins-pipe_app-network     # ربط الخدمة بشبكة Jenkins الخارجية
+      - jenkins-pipe_app-network  # ربط الخدمة بشبكة Jenkins الخارجية
 
   db:
     image: mysql:8.0
@@ -32,11 +32,11 @@ services:
       timeout: 5s
       retries: 10
     networks:
-      - jenkins-pipe_app-network     # نفس الشبكة لربط قاعدة البيانات بالخدمات الأخرى
+      - jenkins-pipe_app-network  # نفس الشبكة لربط قاعدة البيانات بالخدمات الأخرى
 
 networks:
-  app-network:
-    external: true   # نستخدم شبكة موجودة مسبقًا (مثل التي يعمل بها Jenkins)
+  jenkins-pipe_app-network:   # تأكيد اسم الشبكة كما هو موجود عندك
+    external: true            # تعريفها كشبكة خارجية
 
 volumes:
-  db-data:           # تخزين دائم لبيانات MySQL
+  db-data:                    # حجم دائم لتخزين بيانات قاعدة البيانات
