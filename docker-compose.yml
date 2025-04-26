@@ -14,7 +14,7 @@ services:
       - .:/app
     restart: unless-stopped
     networks:
-      - app-network   # ربط الخدمة بشبكة Jenkins الخارجية
+      - jenkins-pipe_app-network     # ربط الخدمة بشبكة Jenkins الخارجية
 
   db:
     image: mysql:8.0
@@ -32,7 +32,7 @@ services:
       timeout: 5s
       retries: 10
     networks:
-      - app-network   # نفس الشبكة لربط قاعدة البيانات بالخدمات الأخرى
+      - jenkins-pipe_app-network     # نفس الشبكة لربط قاعدة البيانات بالخدمات الأخرى
 
 networks:
   app-network:
