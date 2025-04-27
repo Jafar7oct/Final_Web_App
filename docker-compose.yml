@@ -1,25 +1,18 @@
-version: '3.8'
-
 services:
   web:
-    container_name: project_final-web-1  # ✅ اسم ثابت للحاوية
     build: .
     ports:
       - "5000:5000"
     environment:
       - DATABASE_URL=mysql+pymysql://user:password@db:3306/orbitronic
       - SECRET_KEY=your-secret-key
-      - FLASK_APP=app.py 
     depends_on:
       - db
     volumes:
       - .:/app
     restart: unless-stopped
-    networks:
-      - jenkins-pipe_app-network
 
   db:
-    container_name: project_final-db-1  # ✅ اسم ثابت للحاوية
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
@@ -34,12 +27,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    networks:
-      - jenkins-pipe_app-network
-
-networks:
-  jenkins-pipe_app-network:
-    external: true
 
 volumes:
   db-data:
