@@ -1,5 +1,5 @@
 app:
-  applicationId: your-app-id  # Replace with your StackHawk application ID
+  applicationId: jenkins-pipeline # Replace with your StackHawk application ID
   env: production
   host: http://67.205.172.27:5000  # Target server
 hawk:
