@@ -1,0 +1,9 @@
+app:
+  applicationId: jenkins-pipeline # Replace with your StackHawk application ID
+  env: production
+  host: http://67.205.172.27:5000  # Your target server
+hawk:
+  spider:
+    maxDuration: 5  # Limit crawl time to 5 minutes
+  scanner:
+    maxScanDuration: 30  # Limit scan time to 30 minutes
