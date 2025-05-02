@@ -1,13 +1,29 @@
+# -- stackhawk configuration for Final_project --
 app:
-  applicationId: jenkins-pipeline
-  env: production
-  host: http://67.205.172.27:5000
-hawk:
+  # -- An applicationId obtained from the StackHawk platform. --
+  applicationId: 6341ae21-9076-4b14-8497-2d9feb87223e # (required)
+  # -- The environment for the applicationId defined in the StackHawk platform. --
+  env: Development # (required)
+  # -- The url of your application to scan --
+  host: http://67.205.172.27:5000 # (required)
+  hawk:
   startupTimeoutMinutes: 1
   spider:
-    maxDuration: 5
-  scanner:
-    maxScanDuration: 30
-  reports:
-    - type: html
-      destination: /hawk/stackhawk-report.html
+    base: false
+
+
+# -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
+  # openApiConf:
+  #   path: /swagger.json # OR...
+#       filePath: openApi.json
+  # autoPolicy: true
+  # autoInputVectors: true
+  # Configuration Docs: https://docs.stackhawk.com/hawkscan/configuration/
+
+# -- If Authenticated Scanning is needed, add here --
+  # Authenticated Scanning Docs: https://docs.stackhawk.com/hawkscan/authenticated-scanning.html
+  # Authenticated Scanning Repo: https://github.com/kaakaww/scan-configuration/tree/main/Authentication
+
+# -- Help Section --
+  # Docs: https://docs.stackhawk.com/
+  # Contact Support: support@stackhawk.com
