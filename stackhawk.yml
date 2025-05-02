@@ -5,7 +5,7 @@ app:
   # -- The environment for the applicationId defined in the StackHawk platform. --
   env: Development
   # -- The url of your application to scan --
-  host: http://67.205.172.27:5000
+  host: http://67.205.172.27:5000/
 
 hawk:
   startupTimeoutMinutes: 1
